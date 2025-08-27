@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Diálogos - Edição Estratégica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        textarea::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track, .scroll-container::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        textarea::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+            border-radius: 10px;
+            border: 2px solid #1f2937;
+        }
+        .btn-confirm {
+            background-color: #10b981 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-6xl border border-gray-700">
+        
+        <div class="text-center mb-6">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-teal-400">Fábrica de Diálogos</h1>
+            <p class="text-gray-400 mt-2 font-medium">Edição Estratégica</p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Coluna 1: Gerador de Roteiro -->
+            <div class="space-y-6 p-4 border border-gray-700 rounded-lg">
+                <h2 class="text-xl font-bold text-center text-teal-400 mb-4">Passo 1: Gerar Roteiro</h2>
+                
+                <!-- Creation Mode Toggle -->
+                <div class="mb-6 flex justify-center bg-gray-700 p-1 rounded-lg">
+                    <button id="modeRapid" class="w-full py-2 text-sm font-bold rounded-md bg-teal-500 text-gray-900">Modo Rápido</button>
+                    <button id="modeAdvanced" class="w-full py-2 text-sm font-bold rounded-md text-gray-300">Modo Avançado</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Col 1.1 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="charName" class="block text-sm font-medium text-gray-300 mb-2">Herói Principal</label>
+                            <input type="text" id="charName" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: Goku">
+                        </div>
+                        <div>
+                            <label for="plotType" class="block text-sm font-medium text-gray-300 mb-2">Tipo de Enredo</label>
+                            <select id="plotType" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                                <optgroup label="Ação e Fantasia">
+                                    <option value="aventura">Aventura (Resgate)</option>
+                                    <option value="luta">Luta (Superar um poder)</option>
+                                    <option value="desafio">Desafio (Obstáculo físico)</option>
+                                    <option value="competicao">Competição (Contra um rival)</option>
+                                    <option value="misterio">Mistério (Resolver um enigma)</option>
+                                    <option value="sacrificio">Sacrifício (Escolha difícil)</option>
+                                </optgroup>
+                                <optgroup label="Humor e Cotidiano">
+                                    <option value="brincadeira">Brincadeira (Algo dá errado)</option>
+                                    <option value="meme">Meme (Situação engraçada)</option>
+                                    <option value="cotidiano_discussao">Cotidiano (Discussão)</option>
+                                    <option value="cotidiano_trabalho">Cotidiano (Trabalho)</option>
+                                    <option value="cotidiano_amigos">Cotidiano (Amigos)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="scriptDuration" class="block text-sm font-medium text-gray-300 mb-2">Duração do Roteiro</label>
+                            <select id="scriptDuration" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                                <option value="60s">Padrão (~60s)</option>
+                                <option value="30s">Curto (~30s)</option>
+                            </select>
+                        </div>
+                         <!-- Advanced Fields Col 1 -->
+                        <div id="advancedFields1" class="space-y-4 hidden">
+                             <div>
+                                <label for="location" class="block text-sm font-medium text-gray-300 mb-2">Localização da Cena</label>
+                                <input type="text" id="location" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: Planeta Namekusei">
+                            </div>
+                             <div>
+                                <label for="crossoverElement" class="block text-sm font-medium text-gray-300 mb-2">Elemento Surpresa</label>
+                                <input type="text" id="crossoverElement" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: Um Power Ranger">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Col 1.2 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="charUniverse" class="block text-sm font-medium text-gray-300 mb-2">Universo do Personagem</label>
+                            <input type="text" id="charUniverse" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: Dragon Ball">
+                        </div>
+                        <div>
+                            <label for="coStar" class="block text-sm font-medium text-gray-300 mb-2">Personagem Secundário</label>
+                            <input type="text" id="coStar" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: Vegeta">
+                        </div>
+                        <div>
+                            <label for="emotionalTone" class="block text-sm font-medium text-gray-300 mb-2">Tom Emocional</label>
+                            <select id="emotionalTone" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                                <option value="epico">Épico / Sério</option>
+                                <option value="comico">Cômico / Engraçado</option>
+                                <option value="emocionante">Emocionante / Comovente</option>
+                                <option value="suspense">Suspense / Tensão</option>
+                            </select>
+                        </div>
+                         <!-- Advanced Fields Col 2 -->
+                        <div id="advancedFields2" class="space-y-4 hidden">
+                            <div>
+                                <label for="ctaStyle" class="block text-sm font-medium text-gray-300 mb-2">Estilo da CTA</label>
+                                <select id="ctaStyle" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                                    <option value="inscricao">Pedido de Inscrição</option>
+                                    <option value="like">Pedido de Like/Emoji</option>
+                                    <option value="comentario">Pedido de Comentário</option>
+                                    <option value="acao_tela">Ação na Tela (Cliques)</option>
+                                    <option value="continuacao">Gancho para Parte 2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="keyObject" class="block text-sm font-medium text-gray-300 mb-2">Objeto Chave</label>
+                                <input type="text" id="keyObject" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex: As Esferas do Dragão">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 pt-4">
+                    <button id="surpriseBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Me Surpreenda!</button>
+                    <button id="generateBtn" class="w-full bg-teal-500 hover:bg-teal-600 text-gray-900 font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg">Gerar Prompt de Roteiro</button>
+                </div>
+                <div id="scriptPromptResultArea" class="hidden">
+                    <div class="flex justify-between items-center mb-2 mt-4">
+                        <label class="block text-sm font-bold text-teal-400">PROMPT PARA ROTEIRO (DIÁLOGO):</label>
+                        <button id="copyScriptPromptBtn" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-bold py-1 px-3 rounded-lg transition">Copiar</button>
+                    </div>
+                    <textarea id="scriptPromptResult" rows="10" class="w-full bg-gray-900 border border-gray-600 text-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" readonly></textarea>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Gerador de Imagens por Cena -->
+            <div class="space-y-6 p-4 border border-gray-700 rounded-lg">
+                <h2 class="text-xl font-bold text-center text-teal-400">Passo 2: Gerar Imagens</h2>
+                <div>
+                    <label for="pasteScriptArea" class="block text-sm font-medium text-gray-300 mb-2">Cole o roteiro gerado aqui:</label>
+                    <textarea id="pasteScriptArea" rows="10" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" placeholder="Ex:&#10;GOKU: vegeta, você não vai acreditar no que eu encontrei!&#10;VEGETA: não me diga que é outra fruta esquisita, kakaroto."></textarea>
+                </div>
+                <button id="analyzeScriptBtn" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg transition">Analisar Roteiro e Gerar Prompt Mestre</button>
+                <div id="imagePromptResultArea" class="hidden">
+                     <div class="flex justify-between items-center mb-2 mt-4">
+                        <label class="block text-sm font-bold text-teal-400">PROMPT MESTRE PARA IMAGENS:</label>
+                        <button id="copyImagePromptBtn" class="bg-gray-600 hover:bg-gray-700 text-white text-xs font-bold py-1 px-3 rounded-lg transition">Copiar</button>
+                    </div>
+                    <textarea id="imagePromptResult" class="w-full bg-gray-900 border border-gray-600 text-gray-300 rounded-lg p-4 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition" rows="18" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ferramentas e Limpeza -->
+        <div class="mt-8 border-t border-gray-700 pt-6">
+            <div class="flex justify-center items-center gap-4 flex-wrap mb-4">
+                <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="bg-gray-700 hover:bg-gray-600 text-white text-sm font-bold py-2 px-4 rounded-lg transition">
+                    Usar ChatGPT
+                </a>
+                <a href="https://labs.google/fx/pt/tools/image-fx" target="_blank" rel="noopener noreferrer" class="bg-gray-700 hover:bg-gray-600 text-white text-sm font-bold py-2 px-4 rounded-lg transition">
+                    Usar ImageFX
+                </a>
+            </div>
+            <div class="text-center">
+                 <button id="clearBtn" class="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded-lg transition">Limpar Tudo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const modeRapid = document.getElementById('modeRapid');
+        const modeAdvanced = document.getElementById('modeAdvanced');
+        const advancedFields1 = document.getElementById('advancedFields1');
+        const advancedFields2 = document.getElementById('advancedFields2');
+        const charNameInput = document.getElementById('charName');
+        const charUniverseInput = document.getElementById('charUniverse');
+        const coStarInput = document.getElementById('coStar');
+        const plotTypeSelect = document.getElementById('plotType');
+        const emotionalToneSelect = document.getElementById('emotionalTone');
+        const scriptDurationSelect = document.getElementById('scriptDuration');
+        const ctaStyleSelect = document.getElementById('ctaStyle');
+        const locationInput = document.getElementById('location');
+        const keyObjectInput = document.getElementById('keyObject');
+        const crossoverElementInput = document.getElementById('crossoverElement');
+        
+        const generateBtn = document.getElementById('generateBtn');
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        
+        const scriptPromptResultArea = document.getElementById('scriptPromptResultArea');
+        const scriptPromptResult = document.getElementById('scriptPromptResult');
+        const copyScriptPromptBtn = document.getElementById('copyScriptPromptBtn');
+        
+        const pasteScriptArea = document.getElementById('pasteScriptArea');
+        const analyzeScriptBtn = document.getElementById('analyzeScriptBtn');
+        const imagePromptResultArea = document.getElementById('imagePromptResultArea');
+        const imagePromptResult = document.getElementById('imagePromptResult');
+        const copyImagePromptBtn = document.getElementById('copyImagePromptBtn');
+
+        // Surprise Data
+        const surpriseOptions = {
+            characters: [
+                { name: 'Goku', universe: 'Dragon Ball', coStar: 'Vegeta' },
+                { name: 'Vegeta', universe: 'Dragon Ball', coStar: 'Freeza' },
+                { name: 'Naruto', universe: 'Naruto', coStar: 'Sasuke' },
+                { name: 'Luffy', universe: 'One Piece', coStar: 'Zoro' },
+                { name: 'Chaves', universe: 'Vila do Chaves', coStar: 'Seu Madruga' },
+                { name: 'Mulher Maravilha', universe: 'DC Comics', coStar: 'Superman' },
+                { name: 'Batman', universe: 'DC Comics', coStar: 'Coringa' },
+                { name: 'Homem-Aranha', universe: 'Marvel', coStar: 'Venom' },
+                { name: 'Pica-Pau', universe: 'Desenhos Clássicos', coStar: 'Leôncio' },
+            ],
+            locations: ['Academia de Polícia', 'Ilha Deserta', 'Casa Assombrada', 'Planeta Namekusei', 'Vila da Folha', 'Gotham City', 'Um avião cheio de zumbis', 'Uma praia paradisíaca'],
+            keyObjects: ['uma pokebola', 'um morfador de Power Ranger', 'a última semente dos deuses', 'um sanduíche de presunto', 'um cupcake mágico', 'um tênis da Nike', 'uma lâmpada do Gênio', 'a Espada na Pedra'],
+            crossovers: ['um zumbi', 'um dinossauro', 'um alienígena', 'um Power Ranger', 'um Pokémon', 'um Minion', 'um vampiro', 'um fantasma']
+        };
+
+        // Event Listeners
+        modeRapid.addEventListener('click', () => toggleMode(true));
+        modeAdvanced.addEventListener('click', () => toggleMode(false));
+
+        generateBtn.addEventListener('click', () => {
+            if (!charNameInput.value.trim() || !charUniverseInput.value.trim()) {
+                generateBtn.textContent = 'Preencha Herói e Universo!';
+                setTimeout(() => { generateBtn.textContent = 'Gerar Prompt de Roteiro'; }, 2000);
+                return;
+            }
+            scriptPromptResult.value = generateScriptPrompt();
+            scriptPromptResultArea.classList.remove('hidden');
+            showConfirmation(generateBtn, 'Prompt Gerado!');
+        });
+        
+        surpriseBtn.addEventListener('click', () => {
+            const randomCharacter = surpriseOptions.characters[Math.floor(Math.random() * surpriseOptions.characters.length)];
+            
+            charNameInput.value = randomCharacter.name;
+            charUniverseInput.value = randomCharacter.universe;
+            coStarInput.value = randomCharacter.coStar;
+            
+            plotTypeSelect.selectedIndex = Math.floor(Math.random() * plotTypeSelect.options.length);
+            emotionalToneSelect.selectedIndex = Math.floor(Math.random() * emotionalToneSelect.options.length);
+            locationInput.value = surpriseOptions.locations[Math.floor(Math.random() * surpriseOptions.locations.length)];
+            keyObjectInput.value = surpriseOptions.keyObjects[Math.floor(Math.random() * surpriseOptions.keyObjects.length)];
+            crossoverElementInput.value = surpriseOptions.crossovers[Math.floor(Math.random() * surpriseOptions.crossovers.length)];
+
+            toggleMode(false);
+            
+            scriptPromptResult.value = generateScriptPrompt();
+            scriptPromptResultArea.classList.remove('hidden');
+            showConfirmation(surpriseBtn, 'Surpresa Gerada!');
+        });
+
+        analyzeScriptBtn.addEventListener('click', () => {
+            if (!pasteScriptArea.value.trim()) {
+                analyzeScriptBtn.textContent = 'Cole um roteiro primeiro!';
+                setTimeout(() => { analyzeScriptBtn.textContent = 'Analisar Roteiro e Gerar Prompt Mestre'; }, 2000);
+                return;
+            }
+            imagePromptResult.value = generateMasterImagePrompt();
+            imagePromptResultArea.classList.remove('hidden');
+        });
+        
+        clearBtn.addEventListener('click', () => {
+            const inputs = [charNameInput, charUniverseInput, coStarInput, locationInput, keyObjectInput, crossoverElementInput, pasteScriptArea];
+            inputs.forEach(i => i.value = '');
+            plotTypeSelect.selectedIndex = 0;
+            emotionalToneSelect.selectedIndex = 0;
+            scriptDurationSelect.selectedIndex = 0;
+            ctaStyleSelect.selectedIndex = 0;
+            scriptPromptResultArea.classList.add('hidden');
+            imagePromptResultArea.classList.add('hidden');
+            toggleMode(true);
+        });
+
+        copyScriptPromptBtn.addEventListener('click', () => copyToClipboard(scriptPromptResult.value, copyScriptPromptBtn));
+        copyImagePromptBtn.addEventListener('click', () => copyToClipboard(imagePromptResult.value, copyImagePromptBtn));
+
+        // Functions
+        function toggleMode(isRapid) {
+            if (isRapid) {
+                modeRapid.classList.add('bg-teal-500', 'text-gray-900');
+                modeRapid.classList.remove('text-gray-300');
+                modeAdvanced.classList.remove('bg-teal-500', 'text-gray-900');
+                modeAdvanced.classList.add('text-gray-300');
+                advancedFields1.classList.add('hidden');
+                advancedFields2.classList.add('hidden');
+            } else {
+                modeAdvanced.classList.add('bg-teal-500', 'text-gray-900');
+                modeAdvanced.classList.remove('text-gray-300');
+                modeRapid.classList.remove('bg-teal-500', 'text-gray-900');
+                modeRapid.classList.add('text-gray-300');
+                advancedFields1.classList.remove('hidden');
+                advancedFields2.classList.remove('hidden');
+            }
+        }
+
+        function showConfirmation(buttonElement, message) {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = message;
+            buttonElement.classList.add('btn-confirm');
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+                buttonElement.classList.remove('btn-confirm');
+            }, 2000);
+        }
+
+        function copyToClipboard(text, buttonElement) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = 'Copiado!';
+            buttonElement.classList.add('bg-green-500');
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+                buttonElement.classList.remove('bg-green-500');
+            }, 2000);
+        }
+
+        function generateScriptPrompt() {
+            const data = {
+                charName: charNameInput.value.trim(),
+                charUniverse: charUniverseInput.value.trim(),
+                coStar: coStarInput.value.trim(),
+                plotType: plotTypeSelect.options[plotTypeSelect.selectedIndex].text,
+                emotionalTone: emotionalToneSelect.options[emotionalToneSelect.selectedIndex].text,
+                duration: scriptDurationSelect.value,
+                location: locationInput.value.trim(),
+                keyObject: keyObjectInput.value.trim(),
+                crossover: crossoverElementInput.value.trim(),
+            };
+            
+            const durationMap = { '60s': '~60 segundos', '30s': '~30 segundos' };
+            
+            const ctaExamples = `
+- **Pedido de Inscrição Direto:** "Rápido, preciso da SUA ajuda! Se inscreva agora para me dar a força que preciso para vencer!"
+- **Pedido de Like/Emoji:** "Você aí! Cada like que você der fortalece o meu poder! Me ajude!"
+- **Pedido de Comentário (Pergunta):** "Eu não sei o que fazer! O que você faria no meu lugar? Comenta aí embaixo, rápido!"
+- **Pedido de Ação na Tela:** "Continue tocando na tela! É a sua energia que está me ajudando a não desistir!"
+- **Gancho para Continuação:** "Não vou conseguir agora... mas com a sua inscrição, eu volto mais forte na parte 2 para acabar com isso!"
+`;
+
+            let context = '';
+            if (data.location) context += `\n**LOCAL:** A história se passa em ${data.location}.`;
+            if (data.keyObject) context += `\n**ELEMENTO-CHAVE:** O diálogo deve girar em torno de ${data.keyObject}.`;
+            if (data.crossover) context += `\n**ELEMENTO SURPRESA:** A história deve envolver de forma inesperada: ${data.crossover}.`;
+
+            const basePrompt = `Aja como um roteirista de alta performance e copywriter especialista em narrativas virais, mestre em aplicar a Jornada do Herói em roteiros curtos. Sua missão é criar um roteiro de diálogo impactante de ${durationMap[data.duration]} contendo APENAS FALAS.
+
+**PERSONAGENS:** ${data.charName} e ${data.coStar} (do universo ${data.charUniverse})
+**ENREDO:** ${data.plotType}.
+**TOM:** ${data.emotionalTone}.${context}
+
+**REGRAS ESTRATÉGICAS OBRIGATÓRIAS:**
+
+1.  **ESTRUTURA (JORNADA DO HERÓI):** A história DEVE seguir uma jornada clara do início ao fim:
+    * **Ato 1 - O Problema:** Comece apresentando o herói enfrentando uma dificuldade clara, uma dor ou um desafio que gere empatia imediata.
+    * **Ato 2 - A Luta:** Mostre a tensão aumentando. O herói tenta resolver o problema, mas a situação piora, levando-o ao seu limite.
+    * **Ato 3 - A Superação:** A vitória do herói DEVE ser uma consequência direta da ajuda do espectador (através da CTA).
+
+2.  **GANCHO VIRAL (PRIMEIRA FALA):** A PRIMEIRA FALA deve ser um gancho extremamente curioso, polêmico ou chocante para prender a atenção do público instantaneamente.
+
+3.  **CTA INTERATIVA (PONTO DE VIRADA):** No clímax da luta (final do Ato 2), o herói ou um aliado DEVE olhar para a câmera e falar diretamente com o espectador (usando "você"). O seu pedido de ajuda não é um simples pedido, é a CHAVE que destrava a vitória. A ação do espectador É o poder que salva o dia. Inspire-se nestes estilos:
+${ctaExamples}
+4.  **FORMATO ESTRITO:** Use APENAS o formato "NOME EM MAIÚSCULAS: [fala em minúsculas]". Não adicione descrições de cena.
+
+5.  **LINGUAGEM ACESSÍVEL:** O diálogo deve ser impactante, mas livre de palavras de baixo calão.
+
+Comece o roteiro imediatamente.`;
+
+            return basePrompt;
+        }
+
+        function generateMasterImagePrompt() {
+            const scriptText = pasteScriptArea.value.trim();
+            const charName = charNameInput.value.trim();
+            const coStar = coStarInput.value.trim();
+            const charUniverse = charUniverseInput.value.trim();
+            const location = locationInput.value.trim();
+
+            const masterPrompt = `Aja como um especialista em engenharia de prompts para IAs de geração de imagem (Midjourney, DALL-E). Sua tarefa é criar um prompt de imagem em INGLÊS para CADA FALA de um roteiro, com foco em imersão e interação.
+
+**INSTRUÇÕES GERAIS:**
+1.  **Analise o Roteiro:** Leia o roteiro fornecido abaixo.
+2.  **Crie um Prompt por Fala:** Para cada linha de diálogo, crie um prompt de imagem correspondente que visualize a cena.
+3.  **Idioma:** Todos os prompts de imagem devem ser em INGLÊS.
+4.  **Estilo de Arte:** Mantenha um estilo de arte consistente de "modern shonen anime style, vibrant colors, dynamic action lines, detailed characters".
+5.  **Cenário:** Se um local for especificado (${location || 'não especificado'}), use-o como pano de fundo para todas as imagens.
+6.  **Foco no Orador:** O prompt deve focar no personagem que está falando e em sua expressão/ação, incluindo o outro personagem reagindo em segundo plano.
+7.  **INTERAÇÃO COM A CÂMERA (CRÍTICO):** Em momentos de alta emoção, especialmente durante a Chamada para Ação (CTA) ou em falas de desespero/determinação, crie prompts onde o personagem quebra a quarta parede. Ele deve estar olhando diretamente para a câmera, apontando para o espectador, pedindo ajuda com as mãos estendidas em direção à câmera, ou correndo em direção à tela. Torne a cena pessoal para quem assiste.
+8.  **Formato de Saída:** Apresente a saída numerada, com a fala original seguida do prompt de imagem.
+
+**PERSONAGENS PRINCIPAIS:** ${charName} e ${coStar} (do universo ${charUniverse}).
+
+**ROTEIRO PARA ANÁLISE:**
+${scriptText}
+
+**EXEMPLO DE SAÍDA ESPERADA:**
+1.  GOKU: vegeta, você está vendo isso? não vou conseguir sozinho!
+    PROMPT: Medium shot of Goku from Dragon Ball, looking worried, turning his head to look directly into the camera as if asking the viewer for help. Background is ${location || 'a battlefield'}. Modern shonen anime style, dramatic shadows.
+
+2.  VEGETA: rápido, preciso da SUA ajuda! se inscreva para me dar forças!
+    PROMPT: Extreme close-up on Vegeta's determined face, pointing directly at the camera with a demanding expression, sweat on his brow. "I need YOUR help!". Modern shonen anime style, intense lighting, vibrant colors.
+
+---
+Comece a gerar os prompts para o roteiro fornecido AGORA.`;
+            
+            return masterPrompt;
+        }
+
+    </script>
+</body>
+</html>
